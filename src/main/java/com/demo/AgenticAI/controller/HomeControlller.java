@@ -3,28 +3,27 @@ package com.demo.AgenticAI.controller;
 import java.util.Date;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.util.StringUtils; // deprecated in Spring 5.3+
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeControlller {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping("/")
     public String home(HttpServletRequest request) {
 
         // ❌ Deprecated Java constructor
-        Integer port = new Integer(8080);
+        Integer port = Integer.valueOf(8080);
 
         // ❌ Deprecated java.util.Date API
         Date date = new Date();
         int year = date.getYear(); // deprecated
 
         // ❌ Deprecated Spring utility method
-        if (StringUtils.isEmpty(request.getRemoteAddr())) {
+        if (ObjectUtils.isEmpty(request.getRemoteAddr())) {
             return "Unknown client";
         }
 
@@ -38,11 +37,11 @@ public class HomeControlller {
                 + " | port=" + port;
     }
 
-    @RequestMapping(value = "/health", method = RequestMethod.GET)
+    @GetMapping("/health")
     public String health(HttpServletRequest request) {
 
         // ❌ Deprecated boxed primitive constructor
-        Boolean healthy = new Boolean(true);
+        Boolean healthy = Boolean.valueOf(true);
 
         return healthy.toString();
     }
